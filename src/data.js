@@ -1,6 +1,9 @@
 import mainPageImg from "./images/main-page.jpg"
 import mainPageImg1 from "./images/main-page-1.jpg"
 import mainPageImg2 from "./images/main-page-2.jpg"
+import catPageImg from "./images/cat-page.jpg"
+import catPageImg1 from "./images/cat-page-1.jpg"
+import catPageImg2 from "./images/cat-page-2.jpg"
 
 export const sliderItems = [
   {
@@ -26,5 +29,25 @@ export const sliderItems = [
     desc: "FOLLOW YOUR FASHION CREATIVITY",
     alt: "Best-Seller-Page-Image",
     bg: "fbf0f4",
+  },
+]
+
+export const categories = [
+  {
+    id: 1,
+    img: catPageImg,
+    title: "SHIRT STYLE",
+  },
+  {
+    id: 2,
+    img: catPageImg1,
+    title: "SEASONAL",
+
+  },
+  {
+    id: 3,
+    img: catPageImg2,
+    title: "SIMPLE STYLE",
+
   },
 ]

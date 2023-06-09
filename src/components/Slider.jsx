@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { ArrowBackIosNewOutlined, ArrowForwardIosOutlined } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sliderItems } from "../data";
 
 
@@ -40,7 +40,7 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transition: all 1.5s ease;
+  transition: all 1.9s ease;
   transform: translateX(${props=>props.slideIndex * -100}vw);
 `
 
@@ -94,6 +94,7 @@ const Button = styled.button`
   }
 `
 
+//arrow buttons that will reverse to original slide if reached to max slide
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0);
     const handleClick = (direction) => {
@@ -104,6 +105,19 @@ const Slider = () => {
         setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0)
       }
     };
+
+    //automatically set moving slides every 10 seconds using useEffect
+    useEffect(() => {
+      const interval = setInterval(() => {
+          setSlideIndex((prevIndex) =>
+            prevIndex < sliderItems.length -1 ? prevIndex + 1 : 0
+          );
+        }, 10000);
+
+        return () => clearInterval(interval)
+      }, []);
+
+
   return (
       <Container>
         {/* arrow prop */}
