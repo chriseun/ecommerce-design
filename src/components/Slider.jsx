@@ -85,9 +85,10 @@ const Button = styled.button`
   background-color: transparent;
   letter-spacing: 1.25px;
   cursor: pointer;
+
     &:hover {
     background-color: teal;
-    transition: ease-in-out 0.6s;
+    transition: ease 0.5s;
 
     color: #fff;
     border-color: #fff;
@@ -126,7 +127,7 @@ const Slider = () => {
         </Arrow>
         <Wrapper slideIndex={slideIndex}>
             {sliderItems.map((item)=>(
-            <Slide bg={item.bg}>
+            <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
               <Image src={item.img} alt={item.alt}/>
             </ImgContainer>
