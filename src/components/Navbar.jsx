@@ -4,10 +4,16 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import React from "react";
 import styled from 'styled-components'
 
+import { mobile } from "../responsive"
+
 //using Styled Componenets
 //*** npm install styled-components or yarn add styled-components */
 const Container = styled.div`
   height: 60px;
+  // position: sticky;
+  // top: 0;
+  // z-index: 4;
+  background-color: #fff;
 `
 
 const Wrapper = styled.div`
@@ -15,6 +21,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${mobile({ padding: "10px 0" })}
 `
 
 const Left = styled.div`
@@ -26,6 +33,7 @@ const Left = styled.div`
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
+  ${mobile({ display: "none" })}
 `
 
 const SearchContainer = styled.div`
@@ -39,6 +47,7 @@ const SearchContainer = styled.div`
 //styled input creates input
 const Input = styled.input`
   border: none;
+  ${mobile({ width: "50px" })}
 
 `
 
@@ -49,6 +58,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   font-weight: bold;
+  ${mobile({ fontSize: "24px" })}
 `
 
 const Right = styled.div`
@@ -56,12 +66,14 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({ flex: 2, justifyContent: "center" })}
 `
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  ${mobile({ flex: 2, fontSize: "12px", marginLeft: "10px"})}
 `
 
 const Navbar = () => {
@@ -73,7 +85,7 @@ const Navbar = () => {
             EN
           </Language>
           <SearchContainer>
-            <Input />
+            <Input placeholder="Search"/>
             <Search style={{color:"gray", fontSize: "16px"}}/>
           </SearchContainer>
         </Left>

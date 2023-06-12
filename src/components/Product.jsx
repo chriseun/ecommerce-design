@@ -4,6 +4,8 @@ import FavoriteBorderOutlined from '@mui/icons-material/FavoriteBorderOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+import { mobile } from "../responsive"
+
 
 
 const Info = styled.div`
@@ -38,6 +40,8 @@ const Container = styled.div`
   position: relative;
   border-radius: 3px;
 
+  ${mobile({ minWidth: "250px", height: "250px" })}
+
   &:hover ${Info}{
     opacity: 1;
   }
@@ -56,7 +60,7 @@ const Container = styled.div`
 const Image = styled.img`
   height: 80%;
   z-index: 2;
-
+  ${mobile({ height: "90%" })}
 `
 
 const Icon = styled.div`
@@ -70,7 +74,6 @@ const Icon = styled.div`
   margin: 10px;
   transition: all 0.5s ease;
   cursor: pointer;
-
 
   &:hover{
     background-color: #e9f5f5;

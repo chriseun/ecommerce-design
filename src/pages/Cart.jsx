@@ -5,6 +5,8 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 
+import { mobile } from "../responsive"
+
 
 
 const Container = styled.div`
@@ -13,6 +15,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   padding: 20px;
+  ${mobile({ padding: "10px" })}
 `
 
 const Title = styled.h1`
@@ -43,11 +46,13 @@ const TopText= styled.span`
   text-decoration: underline;
   cursor: pointer;
   margin: 0 10px;
+  ${mobile({ display: "none" })}
 `
 
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `
 
 const Info = styled.div`
@@ -64,6 +69,7 @@ const Hr = styled.hr`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `
 const ProductDetails = styled.div`
   flex: 2;
@@ -117,6 +123,7 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
+  ${mobile({ margin: "5px 15px"})}
 `
 
 const ProductPrice = styled.div`
@@ -125,6 +132,7 @@ const ProductPrice = styled.div`
   margin-right: 10px;
   display: flex;
   align-items: center;
+  ${mobile({ marginBottom: "20px", fontWeight: "bolder" })}
   `
 
 const MoneySymbol = styled.span`
