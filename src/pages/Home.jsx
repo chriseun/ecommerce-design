@@ -7,9 +7,19 @@ import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
+import styled from 'styled-components'
+
+const Container = styled.div`
+  height: 60px;
+  // position: sticky;
+  // top: 0;
+  // z-index: 4;
+  background-color: #fff;
+`
+
 const Home = () => {
   return (
-    <div>
+    <Container>
         <Announcement />
         <Navbar />
         <Slider />
@@ -17,7 +27,7 @@ const Home = () => {
         <Products />
         <Newsletter />
         <Footer />
-    </div>
+    </Container>
   );
 }
 

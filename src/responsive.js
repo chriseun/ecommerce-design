@@ -1,17 +1,25 @@
 import { css } from "styled-components"
 
-export const mobile = (props) => {
+export const mobileSmall = (props) => {
   return css`
-    @media only screen and (max-width: 390px) {
+    @media only screen and (max-width: 300px) {
       ${props}
     }
   `
 }
 
-// export const tablet = (props) => {
-//   return css`
-//     @media only screen and (max-width: 380px) {
-//       ${props}
-//     }
-//   `
-// }
+export const mobile = (props) => {
+  return css`
+    @media only screen and (max-width: 420px) {
+      ${props}
+    }
+  `
+}
+
+export const tabletSmall = (props) => {
+  return css`
+    @media only screen and (max-width: 800px) {
+      ${props}
+    }
+  `
+}

@@ -1,10 +1,12 @@
-import { Search } from '@mui/icons-material';
+import { Menu, Search } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import React from "react";
 import styled from 'styled-components'
 
 import { mobile } from "../responsive"
+import { mobileSmall } from "../responsive"
+import { tabletSmall } from "../responsive"
 
 //using Styled Componenets
 //*** npm install styled-components or yarn add styled-components */
@@ -30,10 +32,16 @@ const Left = styled.div`
   align-items: center;
 `
 
+const MenuIcon = styled.div`
+  display: none;
+  ${mobileSmall({ display: "block" })}
+`
+
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
-  ${mobile({ display: "none" })}
+  // ${mobile({ display: "none" })}
+  ${tabletSmall({ display: "none"})}
 `
 
 const SearchContainer = styled.div`
@@ -42,6 +50,7 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+  ${mobileSmall({ display: "none" })}
 
 `
 //styled input creates input
@@ -54,11 +63,13 @@ const Input = styled.input`
 const Center = styled.div`
   flex: 1;
   text-align: center;
+    ${mobileSmall({ textAlign: "left" })}
 `
 
 const Logo = styled.h1`
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
+  ${mobileSmall({ paddingRight: "6rem" })}
 `
 
 const Right = styled.div`
@@ -67,6 +78,7 @@ const Right = styled.div`
   align-items: center;
   justify-content: flex-end;
   ${mobile({ flex: 2, justifyContent: "center" })}
+  ${mobileSmall({ display: "none" })}
 `
 
 const MenuItem = styled.div`
@@ -81,6 +93,9 @@ const Navbar = () => {
     <Container>
         <Wrapper>
         <Left>
+          <MenuIcon>
+              <Menu />
+          </MenuIcon>
           <Language>
             EN
           </Language>

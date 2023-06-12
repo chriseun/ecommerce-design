@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive"
+import { mobileSmall } from "../responsive"
 
 const Container = styled.div`
   height: 30px;
@@ -13,6 +14,7 @@ const Container = styled.div`
   font-weight: bold;
   letter-spacing: 2px;
    ${mobile({ fontSize: "12px" })}
+   ${mobileSmall({ fontSize: "10px", textAlign: "center" })}
 `
 
 const Announcement = () => {

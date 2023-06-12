@@ -4,6 +4,7 @@ import { ArrowBackIosNewOutlined, ArrowForwardIosOutlined } from "@mui/icons-mat
 import { useState, useEffect } from "react";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive"
+import { tabletSmall } from "../responsive"
 
 
 
@@ -14,7 +15,8 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  ${mobile({ display: "none" })}
+  // ${mobile({ display: "none" })}
+  ${tabletSmall({ display: "none"})}
 `
 
 const Arrow = styled.div`

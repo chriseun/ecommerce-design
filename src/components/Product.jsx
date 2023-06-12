@@ -5,6 +5,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import { mobile } from "../responsive"
+import { mobileSmall } from "../responsive"
 
 
 
@@ -23,6 +24,8 @@ const Info = styled.div`
   transition: all 0.5s ease;
     border-radius: 3px;
 
+  ${mobileSmall({ width: "80%", height: "80%", top: "10%", left: "10%"  })}
+
 `
 
 const Container = styled.div`
@@ -34,13 +37,13 @@ const Container = styled.div`
   display: flex;
 
   align-items: center;
-  // justify-content: space-between;
   justify-content: center;
   background-color: #f5fbfd;
   position: relative;
   border-radius: 3px;
-
+  ${mobileSmall({ width: "50px", height: "100px"  })}
   ${mobile({ minWidth: "250px", height: "250px" })}
+
 
   &:hover ${Info}{
     opacity: 1;
@@ -61,6 +64,7 @@ const Image = styled.img`
   height: 80%;
   z-index: 2;
   ${mobile({ height: "90%" })}
+  ${mobileSmall({ height: "70%"  })}
 `
 
 const Icon = styled.div`
@@ -74,6 +78,7 @@ const Icon = styled.div`
   margin: 10px;
   transition: all 0.5s ease;
   cursor: pointer;
+  ${mobileSmall({ width: "50px", height: "50px" })}
 
   &:hover{
     background-color: #e9f5f5;

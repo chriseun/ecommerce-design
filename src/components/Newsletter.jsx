@@ -3,6 +3,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { mobile } from "../responsive"
+import { mobileSmall } from "../responsive"
+import { tabletSmall } from "../responsive"
 
 const Container = styled.div`
   height: 60vh;
@@ -18,13 +20,15 @@ const Title = styled.h1`
   margin-bottom: 20px;
   letter-spacing: 3px;
   ${mobile({ fontSize: "55px" })}
+  ${mobileSmall({ fontSize: "45px"  })}
 `
 
 const Description = styled.div`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
-  ${mobile({ textAlign: "center" })}
+  ${tabletSmall({ textAlign: "center" })}
+  ${mobileSmall({ fontSize: "20px" })}
 `
 
 const InputContainer = styled.div`
@@ -35,6 +39,7 @@ const InputContainer = styled.div`
   justify-content: space-between;
   border: 1px solid lightgrey;
   ${mobile({ width: "80%" })}
+
 `
 
 const Input = styled.input`
@@ -42,7 +47,7 @@ const Input = styled.input`
   flex: 8;
   padding-left: 20px;
   font-size: 1.05rem;
-
+  ${mobileSmall({ width: "50%" })}
 `
 
 const Button = styled.button`
