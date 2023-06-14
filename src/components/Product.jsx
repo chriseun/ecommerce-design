@@ -6,6 +6,10 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import { mobile } from "../responsive"
 import { mobileSmall } from "../responsive"
+import { mobileLarge } from "../responsive"
+import { tablet } from "../responsive"
+import { screenLarge } from "../responsive"
+
 
 
 
@@ -43,6 +47,7 @@ const Container = styled.div`
   border-radius: 3px;
   ${mobileSmall({ width: "50px", height: "100px"  })}
   ${mobile({ minWidth: "250px", height: "250px" })}
+  ${screenLarge({ minWidth: "20%"})}
 
 
   &:hover ${Info}{
@@ -63,8 +68,10 @@ const Container = styled.div`
 const Image = styled.img`
   height: 80%;
   z-index: 2;
+  ${mobileSmall({ height: "80%"  })}
   ${mobile({ height: "90%" })}
-  ${mobileSmall({ height: "70%"  })}
+  ${mobileLarge({ height: "100%"  })}
+  ${tablet({ height: "60%"})}
 `
 
 const Icon = styled.div`

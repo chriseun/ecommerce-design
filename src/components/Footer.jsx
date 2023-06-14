@@ -4,13 +4,14 @@ import React from "react";
 import styled from "styled-components";
 
 import { mobile } from "../responsive"
+import { mobileLarge } from "../responsive"
 import { tabletSmall } from "../responsive"
 
 
 const Container = styled.div`
   display: flex;
   margin: 20px 15px;
-  ${mobile({ flexDirection: "column", margin: 0 })}
+  ${mobileLarge({ flexDirection: "column", margin: 0 })}
 `
 
 const Left = styled.div`
@@ -18,7 +19,7 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  ${mobile({ backgroundColor: "teal", color: "#fff"})}
+  ${mobileLarge({ backgroundColor: "teal", color: "#fff"})}
 `
 
 const Logo = styled.h1`

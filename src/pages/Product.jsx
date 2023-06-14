@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 
 import { mobile } from "../responsive"
+import { mobileLarge } from "../responsive"
+import { tablet } from "../responsive"
 
 const Container = styled.div`
 
@@ -15,11 +17,12 @@ const Container = styled.div`
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: "10px", flexDirection: "column" })}
+  ${mobileLarge({ padding: "10px", flexDirection: "column" })}
 `
 
 const ImageContainer = styled.div`
   flex: 1;
+  ${mobileLarge({ display: "flex", justifyContent: "center"})}
 `
 
 const Image = styled.img`
@@ -27,6 +30,8 @@ const Image = styled.img`
   height: 90vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
+   ${mobileLarge({ height: "60vh", width: "80%" })}
+   ${tablet({ height: "100%", width: "100%" })}
 `
 
 const InfoContainer = styled.div`
@@ -56,6 +61,7 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobile({ width: "100%" })}
+  ${mobileLarge({ width: "60%" })}
 `
 
 const Filter = styled.div`
@@ -91,7 +97,8 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ width: "100%" })}
+  ${mobileLarge({ width: "100%" })}
+
 `
 
 const AmountContainer = styled.div`

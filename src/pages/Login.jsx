@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import LoginImage from "../images/login-page.jpg"
 
-import { mobile } from "../responsive"
+import { mobileSmall } from "../responsive"
+import { mobileLarge } from "../responsive"
+import { tablet } from "../responsive"
+
 
 const Container = styled.div`
   width: 100vw;
@@ -17,7 +20,8 @@ const Wrapper = styled.div`
   width: 25%;
   padding: 20px;
   background-color: #fff;
-  ${mobile({ width: "75%" })}
+  ${mobileLarge({ width: "75%" })}
+  ${tablet({ width: "55%" })}
 `
 
 const Title = styled.h1`
@@ -46,6 +50,7 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  ${mobileSmall({ width: "70%" })}
 
 `
 
