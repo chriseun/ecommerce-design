@@ -10,6 +10,13 @@ import { mobile } from "../responsive"
 import { mobileLarge } from "../responsive"
 import { tablet } from "../responsive"
 
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { publicRequest } from "../requestMethods";
+//used to send action object to redux store to update the state
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartRedux";
+
 const Container = styled.div`
 
 `
@@ -81,6 +88,8 @@ const FilterColor = styled.div`
   background-color: ${props => props.color};
   margin: 0 5px;
   cursor: pointer;
+  border: ${props =>
+  props.selected ? "2px solid gold" : "1px solid grey"};
 `
 
 const FilterSize = styled.select`
@@ -135,61 +144,105 @@ const Button = styled.button`
 
 
 const Product = () => {
+  // using useLocation hook
+  const location = useLocation()
+  //thrid element from the pathname ex) localhost3000/Product/...
+  const id = location.pathname.split("/")[2]
+  const [product, setProduct] = useState({})
+  //for adding and removing item before adding into cart
+  const [quantity, setQuantity] = useState(1)
+  //choosing color and size for each product
+  const [color, setColor] = useState("")
+  //for selecting color and border gold
+  const [selectedColor, setSelectedColor] = useState("");
+  const [size, setSize] = useState("")
+  const dispatch = useDispatch()
+
+  const handleColorClick = color => {
+    setSelectedColor(color);
+  };
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try{
+        const res = await publicRequest.get("/products/find/" + id)
+        setProduct(res.data)
+      }catch(err) {}
+    }
+    getProduct()
+  }, [id])
+
+  const handleQuantity = (type) => {
+    if (type === "decrease") {
+      //decrease button and cannot be lower than 1
+     quantity > 1 && setQuantity(quantity - 1)
+    } else {
+      //increase quantity
+      setQuantity(quantity + 1)
+    }
+  }
+
+  const handleClick = () => {
+    //update cart - product and quantity
+    //ALL product information, quantity, color and size
+    dispatch(
+      addProduct({ ...product, quantity, color, size})
+      )
+  }
+
   return (
       <Container>
         <Navbar />
         <Announcement />
         <Wrapper>
           <ImageContainer>
-            <Image src={require("../images/product-page.jpg")} />
+            <Image src={product.img} />
           </ImageContainer>
           <InfoContainer>
             <Title>
-              Pokadot Dress
+              {product.title}
               </Title>
             <ProductDescription>
-              Step out in style with our elegant Polka Dot Dress,
-              featuring a classic design adorned with playful polka dots. This dress is perfect for any occasion,
-              whether it's a casual outing or a special event.
-              Embrace timeless fashion with our Polka Dot Dress and make a statement wherever you go.
+              {product.des}
               </ProductDescription>
               <Price>
-                $25
+                $ {product.price}
               </Price>
               <FilterContainer>
                 <Filter>
                   <FilterTitle>
                     Color
                   </FilterTitle>
-                  <FilterColor color="#000">
-
-                  </FilterColor>
-                  <FilterColor color="darkblue">
-
-                  </FilterColor>
-                  <FilterColor color="gray">
-
-                  </FilterColor>
+                    {product.color && product.color.map((c) => (
+                      <FilterColor
+                        color={c}
+                        key={c}
+                        selected={c === selectedColor}
+                        onClick={() => {
+                        setColor(c);
+                        handleColorClick(c)} }
+                        />
+                    ))}
                 </Filter>
                 <Filter>
                   <FilterTitle>
                     Size
                   </FilterTitle>
-                  <FilterSize>
-                    <FilterSizeOption>S</FilterSizeOption>
-                    <FilterSizeOption>M</FilterSizeOption>
-                    <FilterSizeOption>L</FilterSizeOption>
-                    <FilterSizeOption>XL</FilterSizeOption>
+                  <FilterSize onChange={(e)=>setSize(e.target.value)}>
+                    {product.size && product.size.map((s) => (
+                      <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                    ))}
+
                   </FilterSize>
                 </Filter>
               </FilterContainer>
               <AddContainer>
                 <AmountContainer>
-                  <Remove />
-                  <Amount>1</Amount>
-                  <Add />
+                  <Remove onClick={() => handleQuantity("decrease")}/>
+                  <Amount>{quantity}</Amount>
+                  <Add onClick={() => handleQuantity("increase")}/>
                 </AmountContainer>
-                <Button>ADD TO CART</Button>
+                <Button onClick={handleClick}>ADD TO CART</Button>
               </AddContainer>
           </InfoContainer>
         </Wrapper>

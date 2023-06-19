@@ -10,6 +10,8 @@ import { mobileLarge } from "../responsive"
 import { tablet } from "../responsive"
 import { screenLarge } from "../responsive"
 
+import { Link } from "react-router-dom";
+
 
 
 
@@ -94,6 +96,8 @@ const Icon = styled.div`
   }
 `
 
+
+
 const Product = ({item}) => {
   return (
       <Container>
@@ -104,7 +108,10 @@ const Product = ({item}) => {
             <ShoppingCartOutlinedIcon />
           </Icon>
           <Icon>
+            {/* linking to specific product */}
+            <Link to={`/product/${item._id}`}>
             <SearchOutlinedIcon />
+            </Link>
           </Icon>
           <Icon>
             <FavoriteBorderOutlined />

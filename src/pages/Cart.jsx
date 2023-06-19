@@ -4,10 +4,14 @@ import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
-
 import { mobile } from "../responsive"
 
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout"
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
+const KEY = process.env.REACT_APP_STRIPE
 
 const Container = styled.div`
 
@@ -30,12 +34,35 @@ const Top = styled.div`
   padding: 20px;
 `
 const TopButton = styled.button`
-  padding: 10px;
+  padding: 0;
   font-weight: 600;
   cursor: pointer;
-  border: ${props => props.type === "filled" && "none"};
-  background-color: ${props => props.type === "filled" ? "black" : 'transparent'};
-  color: ${props => props.type === "filled" && "white"};
+  border: none;
+  background-color: #000;
+  color: #fff;
+    cursor: pointer;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+
+    }
+`
+const TopButtonTwo = styled.button`
+
+  padding: 15px;
+  background-color: #fff;
+  color: #000;
+  font-weight: bolder;
+  font-size: 17px;
+  letter-spacing: 1.5px;
+  border: 3px solid #000;
+  transition: ease-in 0.4s;
+  cursor: pointer;
+    &:hover {
+      background-color: #000;
+      color: #fff;
+
+    }
 `
 
 const TopTexts= styled.div`
@@ -197,6 +224,14 @@ const Button = styled.button`
 
 
 const Cart = () => {
+  //retrieves the value of cart state from redux store and assign it to cart variable
+  const cart = useSelector(state=>state.cart)
+  const [stripeToken, setStripeToken] = useState(null)
+
+  const onToken = (token) =>{
+    setStripeToken(token)
+  }
+  console.log(stripeToken)
   return (
       <Container>
         <Navbar />
@@ -206,15 +241,31 @@ const Cart = () => {
             YOUR CART
           </Title>
           <Top>
-            <TopButton>
+            <Link to="/">
+            <TopButtonTwo>
               CONTINUE SHOPPING
-            </TopButton>
+            </TopButtonTwo>
+            </Link>
             <TopTexts>
               <TopText>Shopping Bag(2)</TopText>
               <TopText>Your Wishlist (0)</TopText>
             </TopTexts>
             <TopButton type="filled">
-              CHECKOUT NOW
+              {/* https://www.npmjs.com/package/react-stripe-checkout - react stripe checkout */}
+              <StripeCheckout
+                name="MCM"
+                image="https://ecommercemcm.s3.us-west-1.amazonaws.com/just+shirts/marbaker.swe_japanese_desiner_shirt_hip_hop_fashion_1066938d-eef0-4c40-b858-59c1c8691176+copy1.png"
+                billingAddress
+                shippingAddress
+                description={`Your total is $${cart.total}`}
+                //numbers are calculated in cents
+                amount={cart.total * 100}
+                token={onToken}
+                stripeKey={KEY}
+                >
+                <Button>CHECKOUT NOW
+                </Button>
+              </StripeCheckout>
             </TopButton>
 
           </Top>
@@ -222,19 +273,20 @@ const Cart = () => {
             <Info>
                 <Hr />
 
+              {cart.products.map(product=>(
               <Product>
                 <ProductDetails>
-                  <Image src={require("../images/your-bag-image.jpg")}/>
+                  <Image src={product.img}/>
                   <Details>
                     <ProductName>
-                      <b>Product: </b> 2015 Converse Limited Edition
+                      <b>Product: </b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID: </b> 234235
+                      <b>ID: </b> {product._id}
                     </ProductId>
-                    <ProductColor color="black"/>
+                    <ProductColor color={product.color}/>
                     <ProductSize>
-                      <b>Size: </b> Large
+                      <b>Size: </b> {product.size}
                     </ProductSize>
                   </Details>
                 </ProductDetails>
@@ -242,49 +294,21 @@ const Cart = () => {
                     <ProductAmountContainer>
                       <Add />
                         <ProductAmount>
-                          2
+                          {product.quantity}
                         </ProductAmount>
                       <Remove />
                     </ProductAmountContainer>
                     <ProductPrice>
                       <MoneySymbol>$</MoneySymbol>
-                       35
+                       {product.price * product.quantity}
                     </ProductPrice>
                 </PriceDetails>
               </Product>
+              ))}
 
                 <Hr />
 
-              <Product>
-                <ProductDetails>
-                  <Image src={require("../images/pop-page-3.jpg")}/>
-                  <Details>
-                    <ProductName>
-                      <b>Product: </b> 2023 Oceanview Blouse
-                    </ProductName>
-                    <ProductId>
-                      <b>ID: </b> 765227
-                    </ProductId>
-                    <ProductColor color="lightblue"/>
-                    <ProductSize>
-                      <b>Size: </b> Small
-                    </ProductSize>
-                  </Details>
-                </ProductDetails>
-                <PriceDetails>
-                    <ProductAmountContainer>
-                      <Add />
-                        <ProductAmount>
-                          1
-                        </ProductAmount>
-                      <Remove />
-                    </ProductAmountContainer>
-                    <ProductPrice>
-                      <MoneySymbol>$</MoneySymbol>
-                       26
-                    </ProductPrice>
-                </PriceDetails>
-              </Product>
+
             </Info>
 
             <Summary>
@@ -293,7 +317,7 @@ const Cart = () => {
               </SummaryTitle>
               <SummaryItem>
                 <SummaryItemText>Subtotal: </SummaryItemText>
-                <SummaryItemPrice>$96</SummaryItemPrice>
+                <SummaryItemPrice>${cart.total}</SummaryItemPrice>
               </SummaryItem>
 
               <SummaryItem>
@@ -308,10 +332,25 @@ const Cart = () => {
 
               <SummaryItem type="total">
                 <SummaryItemText>Total: </SummaryItemText>
-                <SummaryItemPrice>$96</SummaryItemPrice>
+                <SummaryItemPrice>${cart.total}</SummaryItemPrice>
               </SummaryItem>
 
-              <Button>CHECKOUT NOW</Button>
+              {/* https://www.npmjs.com/package/react-stripe-checkout - react stripe checkout */}
+              <StripeCheckout
+                name="MCM"
+                image="https://ecommercemcm.s3.us-west-1.amazonaws.com/just+shirts/marbaker.swe_japanese_desiner_shirt_hip_hop_fashion_1066938d-eef0-4c40-b858-59c1c8691176+copy1.png"
+                billingAddress
+                shippingAddress
+                description={`Your total is $${cart.total}`}
+                //numbers are calculated in cents
+                amount={cart.total * 100}
+                token={onToken}
+                stripeKey={KEY}
+                >
+                <Button>CHECKOUT NOW
+                </Button>
+              </StripeCheckout>
+
             </Summary>
           </Bottom>
         </Wrapper>

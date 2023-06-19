@@ -6,6 +6,7 @@ import { sliderItems } from "../data";
 // import { mobile } from "../responsive"
 import { tabletSmall } from "../responsive"
 import { tablet } from "../responsive"
+import { Link } from "react-router-dom";
 
 
 
@@ -143,7 +144,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Description>{item.desc}</Description>
-              <Button>SHOP NOW</Button>
+              <Button><Link to="/products/women" style={{ textDecoration: 'none' }}>SHOP NOW</Link></Button>
             </InfoContainer>
           </Slide>
 

@@ -8,6 +8,9 @@ import { mobile } from "../responsive"
 import { mobileSmall } from "../responsive"
 import { tabletSmall } from "../responsive"
 
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 //using Styled Componenets
 //*** npm install styled-components or yarn add styled-components */
 const Container = styled.div`
@@ -89,6 +92,9 @@ const MenuItem = styled.div`
 `
 
 const Navbar = () => {
+  //using cart from cartRedux.js
+  const quantity = useSelector(state => state.cart.quantity)
+
   return (
     <Container>
         <Wrapper>
@@ -106,18 +112,25 @@ const Navbar = () => {
         </Left>
         <Center>
           <Logo>
-            Marlons
+            <Link to="/" style={{ textDecoration: 'none' }}>MCM</Link>
           </Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>
+          <Link to="/cart">
+            <MenuItem>
           {/* badge and mail icon from material ui */}
-              <Badge badgeContent={4} color="primary">
+          {/* using quantity from cartRedux.js */}
+              <Badge badgeContent={quantity} color="primary">
                   <ShoppingCartOutlinedIcon />
               </Badge>
           </MenuItem>
+          </Link>
         </Right>
         </Wrapper>
     </Container>

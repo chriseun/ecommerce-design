@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import RegisterImage from "../images/register-page.jpg"
+// import RegisterImage from "../images/register-page.jpg"
 
 import { mobileSmall } from "../responsive"
 import { mobileLarge } from "../responsive"
@@ -10,7 +10,7 @@ import { tablet } from "../responsive"
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: url(${RegisterImage}) top;
+  background: url(https://ecommercemcm.s3.us-west-1.amazonaws.com/4/marbaker.swe_black_young_women_wearing_japanese_desiner_shirt_h_c7eb5b5e-74a2-45d6-a284-6191b39babcb.png);
   background-size: cover;
   display: flex;
   align-items: center;
@@ -51,7 +51,7 @@ const Button = styled.button`
   width: 40%;
   border: none;
   padding: 15px 20px;
-  background-color: teal;
+  background-color: #000;
   color: white;
   cursor: pointer;
   ${mobileSmall({ width: "100%" })}
